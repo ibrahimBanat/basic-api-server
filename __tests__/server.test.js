@@ -21,84 +21,103 @@ describe('api server', () => {
       let response = await request.delete(route);
       expect(response.status).toEqual(404);
     });
+    it('we have /clothes with 200', async () => {
+      const response = await request.get('/api/v1/clothes');
+      expect(response.status).toEqual(200);
+    });
+    it('we have /food with 200', async () => {
+      const response = await request.get('/api/v1/food');
+      expect(response.status).toEqual(200);
+    });
   });
 
   describe('checking the status code and returned data for', () => {
     let id;
-    it('record using POST', async () => {
-      //arrange
-      let food = {
-        type: 'mansaf',
-        quantity: 3,
-      };
-      //act
-      let response = await (await request.post('/api/v1/food')).send(food);
-      //assert
-      expect(response.status).toEqual(201);
-      expect(response.body.data.type).toEqual('mansaf');
-      expect(response.body.data.quantity).toEqual('3');
-      expect(response.body.id).toBeTruthy();
-      id = response.body.id;
+    describe('/clothes', () => {
+      it('on record using POST', async () => {
+        //arrange
+        let clothes = {
+          type: 'jeans',
+          quantity: 3,
+        };
+        //act
+        let response = await request.post('/api/v1/clothes').send(clothes);
+        //assert
+        expect(response.status).toEqual(201);
+        expect(response.body.data.type).toEqual('jeans');
+        expect(response.body.data.quantity).toEqual(3);
+        id = response.body.id;
+      });
+      it('on record using GET', async () => {
+        //arrange
+
+        //act
+        let response = await request.get('/api/v1/clothes');
+        //assert
+        expect(response.status).toEqual(200);
+      });
+      it('on record using PUT', async () => {
+        //arrange
+
+        //act
+        let response = await request.put(`/api/v1/clothes/${id}`).send({
+          type: 't-shirt',
+          quantity: 5,
+        });
+        //assert
+        expect(response.status).toEqual(200);
+        expect(response.body.data.type).toEqual('t-shirt');
+      });
+      it('on record using GET/:id', async () => {
+        //arrange
+        //act
+        const response = await request.get(`/api/v1/clothes/${id}`);
+        expect(response.status).toEqual(200);
+        expect(response.body.data.type).toEqual('t-shirt');
+      });
     });
-    it('record using GET', async () => {
-      //arrange
-      //act
-      let response = await request.get('/api/v1/food');
-      //assert
-      expect(response.status).toEqual(200);
-      expect(response.body).toEqual([{ data: newStudent, id: id }]);
+    describe('/food', () => {
+      it('on record using POST', async () => {
+        //arrange
+        let food = {
+          type: 'burger',
+          quantity: 3,
+        };
+        //act
+        let response = await request.post('/api/v1/food').send(food);
+        //assert
+        expect(response.status).toEqual(201);
+        expect(response.body.data.type).toEqual('burger');
+        expect(response.body.data.quantity).toEqual(3);
+        id = response.body.id;
+      });
+      it('on record using GET', async () => {
+        //arrange
+
+        //act
+        let response = await request.get('/api/v1/food');
+        //assert
+        expect(response.status).toEqual(200);
+      });
+      it('on record using PUT', async () => {
+        //arrange
+
+        //act
+        let response = await request.put(`/api/v1/food/${id}`).send({
+          type: 'shawerma',
+          quantity: 5,
+        });
+        //assert
+        expect(response.status).toEqual(200);
+        expect(response.body.data.type).toEqual('shawerma');
+      });
+      it('on record using GET/:id', async () => {
+        //arrange
+        //act
+        const response = await request.get(`/api/v1/food/${id}`);
+        expect(response.status).toEqual(200);
+        expect(response.body.data.type).toEqual('shawerma');
+      });
     });
   });
 });
-
-// describe('API Student testing', () => {
-//     let id;
-//     let newStudent = {
-//         name: 'Mousa',
-//         age: '25'
-//     }
-//     it('should create a new student ', async () => {
-//         const response = await request.post('/student').send(newStudent);
-
-//         expect(response.status).toEqual(201);
-//         expect(response.body.data.name).toEqual('Mousa');
-//         expect(response.body.data.age).toEqual('25');
-//         expect(response.body.id).toBeTruthy();
-
-//         id = response.body.id;
-//     });
-//     it('Should Read all Student',async()=>{
-//         const response = await request.get('/student');
-
-//         expect(response.status).toEqual(200)
-//         expect(response.body).toEqual([{"data": newStudent, "id": id}])
-//     });
-
-//     let newInfo = {
-//         name: 'Mosa',
-//         age : '24'
-//     }
-//     it('should Update the student information' , async()=> {
-
-//         const response = await request.put(`/student/${id}`).send(newInfo);
-
-//         expect(response.body.data.name).toEqual('Mosa');
-//         expect(response.body.data.age).toEqual('24');
-//         expect(response.body.id).toEqual(id);
-//     });
-//     it('Should Read one Student Info',async()=>{
-//         const response = await request.get(`/student/${id}`);
-//         expect(response.status).toEqual(200)
-//         expect(response.body.data.name).toEqual('Mosa');
-//         expect(response.body.data.age).toEqual('24');
-//         expect(response.body.id).toEqual(id);
-
-//     });
-//     it('Should delete  Student Info',async()=>{
-//         const deleteStudent = await request.delete(`/student/${id}`);
-//         const tryReadDeletedStudent = await request.get(`/student/${id}`);
-//         expect(tryReadDeletedStudent.status).toEqual(200)
-//         expect(tryReadDeletedStudent.body).toBeFalsy();
-
-//     });
-// });
