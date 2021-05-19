@@ -1,2 +1,21 @@
 # basic-api-server
-Dynamic API Phase 2: Perform CRUD Operations on a database
+
+Build a REST API using Express, by creating a proper series of endpoints that perform CRUD operations on a database, using the REST standard.
+
+## Feature Requierments
+
+- Create two routes for Clothes and Food
+- Getting data for clothes and food
+- Add data for both routes
+- Update data
+- Delete data
+
+## UML
+
+![api](./assets/basic-api-server.png)
+
+## Tests & deployment
+
+[Actions](https://github.com/ibrahimBanat/basic-api-server/actions)
+
+[Heroku](https://basic-api-server-dev.herokuapp.com/)
