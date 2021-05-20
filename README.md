@@ -12,7 +12,7 @@ Build a REST API using Express, by creating a proper series of endpoints that pe
 
 ## UML
 
-![api](./assets/basic-api-server.png)
+![api](./assets/basic-api-server.PNG)
 
 ## Tests & deployment
 
