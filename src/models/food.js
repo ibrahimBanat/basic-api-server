@@ -30,8 +30,8 @@ class food {
     return x;
   }
   delete(id) {
-    let remain = this.db.filter(item => item.id !== id);
-    return remain;
+    this.db = this.db.filter(item => item.id !== id);
+    return this.db;
   }
 }
 
