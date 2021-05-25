@@ -19,3 +19,7 @@ Build a REST API using Express, by creating a proper series of endpoints that pe
 [Actions](https://github.com/ibrahimBanat/basic-api-server/actions)
 
 [Heroku](https://basic-api-server-dev.herokuapp.com/)
+
+### Coverage
+
+![api-server](./assets/basic-api-server-test.PNG)
